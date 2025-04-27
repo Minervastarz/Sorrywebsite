@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hey Cutiepie ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pacifico', cursive;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Welcome Screen */
+    #welcome {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #welcome h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    #welcome button {
+      background: white;
+      color: #66a6ff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1.5rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Pacifico', cursive;
+    }
+
+    #welcome button:hover {
+      background: #e0f7ff;
+    }
+
+    /* Main Content */
+    #main-content {
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    #main-content h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #main-content p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    /* Heart Floating */
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: #ff6b81;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      opacity: 0.8;
+      animation: floatUp 10s linear infinite;
+      cursor: pointer;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: #ff6b81;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Pop Animation */
+    @keyframes popHeart {
+      0% { transform: scale(1) rotate(45deg); opacity: 1; }
+      50% { transform: scale(2) rotate(45deg); opacity: 0.5; }
+      100% { transform: scale(0) rotate(45deg); opacity: 0; }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Welcome Screen -->
+<div id="welcome">
+  <h1>Hey Cutiepie 💖</h1>
+  <button onclick="startSite()">Click to enter</button>
+</div>
+
+<!-- Main Content -->
+<div id="main-content">
+  <h1>I'm Sorry, My Love ❤️</h1>
+  <p>
+    I know we had some fights... and I might have said some things that hurt you.<br><br>
+    It was never my intention to make you feel like you weren't enough — because you are more than enough to me.  
+    I said harsh words because I missed you, because I love you so much that even a little distance feels too much sometimes.  
+    <br><br>
+    You are the best thing that has ever happened to me.  
+    Please forgive me for being impatient, for doubting even for a second what we have.  
+    I trust you, I love you, and I need you.  
+    <br><br>
+    Let's move past the fights and hold each other even tighter.  
+    I am yours, always and forever. 💖
+  </p>
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" src="your-song.mp3" loop></audio>
+
+<script>
+  function startSite() {
+    document.getElementById('welcome').style.display = 'none';
+    document.getElementById('main-content').style.display = 'flex';
+    document.getElementById('bgMusic').play();
+    startHearts();
+  }
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 5 + 8) + "s"; // Slower
+    document.body.appendChild(heart);
+
+    heart.addEventListener('click', () => {
+      heart.style.animation = 'popHeart 0.6s forwards';
+      setTimeout(() => {
+        heart.remove();
+      }, 600);
+    });
+
+    setTimeout(() => {
+      heart.remove();
+    }, 12000); // Remove after floating
+  }
+
+  function startHearts() {
+    setInterval(createHeart, 700); // Slow generation
+  }
+</script>
+
+</body>
+</html>
